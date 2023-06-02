@@ -1,0 +1,49 @@
+html {
+    background-color: black;
+}
+
+.main-container {
+    display: grid;
+    grid-template-rows: 1fr 1fr 5fr;
+    height: 100vh;
+}
+
+.welcome {
+    display: flex;
+    color: rgb(12, 232, 192);
+    font-family: "Lucida Console", "Courier New", monospace;
+    font-size: 30px;
+    justify-content: center;
+    align-items: center;
+}
+
+#start-button {
+    font-family: "Lucida Console", "Courier New", monospace;
+    padding: 8px;
+    display: flex;
+    justify-content: center;    
+    align-items: center;
+    background-color: rgb(9, 177, 146);
+    color: antiquewhite;
+    font-size: 18px;
+    width: fit-content;
+    border-radius: 25%;
+    border: solid 1px white;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.3s ease;
+
+}
+
+#start-button:hover {
+    background-color: rgb(6, 131, 109);
+    transform: scale(1.1); /* Animate! */
+}
+
+.button {
+    display: flex;
+    justify-content: center;    
+    align-items: center;
+}
+
+.game-container {
+    
+}
