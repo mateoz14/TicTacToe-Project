@@ -10,11 +10,16 @@
 <body>
     <div class="main-container">
         <div class="welcome">Welcome to Mateo's Tic Tac Toe!</div>
-        <button class="start-button">Start Game</button>
+        <div class="button">
+            <button id="start-button">Start Game</button>
+            <div id="dice-roll">Rolling dice</div>
+        </div>
         <div class="game-container">
             <div class="player1-board">
+                <div id="marker">O</div>
                 <div id="player-1">Player 1</div>
-                <div id="player-1-score">0</div>
+                <div id="player-1-score"></div>
+                
             </div>
             <div class="tictactoe-box">
                 <div class="row1">
@@ -33,10 +38,11 @@
                     <div id="box3"></div>
                 </div>
             </div>
-            <div class="tictactoe-box"></div>
             <div class="player2-board">
+                <div id="marker">X</div>
                 <div id="player-2">Player 2</div>
-                <div id="player-2-score">0</div>
+                <div id="player-2-score"></div>
+            
             </div>
         </div>
     </div>

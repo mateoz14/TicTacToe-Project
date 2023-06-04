@@ -40,6 +40,16 @@ html {
     transform: scale(1.1); /* Animate! */
 }
 
+#dice-roll  {
+    background-color: black;
+    border-color: black;
+    color: antiquewhite;
+    position: absolute;
+    display: none;
+}
+
+
+
 .button {
     display: flex;
     justify-content: center;    
