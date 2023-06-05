@@ -1,31 +1,36 @@
+
+
+
 const ticTacToe = (() => {
     const createPlayers = (name, marker, score) => {
-    return{name, marker, score}; // factory function to create players and their data.
-};
+        return{name, marker, score}; // factory function to create players and their data.
+    };
     const startButton = document.querySelector("#start-button");
     
     let currentMarker = "X";
     
-    let createGameBoard = (() => {
-        gameBoard = [];
-        for (let i = 0; i <= 8; i++)  {
+    const createGameBox = (() => {
+        let gameBoard = [];
+        for (let i = 0; i <= 8; i++) {
             let newBox = document.querySelector(`#box${i}`)
             gameBoard[i] = newBox;
-            gameBoard[i].addEventListener('click', () => {
-                if (gameBoard.textContent == "") {
-                    
-                } else {gameBoard[i].textContent = currentMarker;}
-                if (currentMarker == 'X') {
-                    currentMarker = 'O';
+            gameBoard[i].addEventListener('click', (() => {
+                if (gameBoard[i].textContent == "") {
+                    gameBoard[i].textContent = currentMarker;
+                    if (currentMarker == "X") {
+                        currentMarker ="O";
+                    } else {
+                        currentMarker = "X";
+                    }
                 } else {
-                    currentMarker = 'X';
+                    // do zero zip nada.
                 }
-            })
-        };
+            }))
+        } return gameBoard;
     })();
     
-    
-    
+    if ((gameBoard[0].textContent === gameBoard[]))
+
 })();
 
 
