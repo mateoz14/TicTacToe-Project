@@ -1,28 +1,36 @@
-let gameBoard = []
-
-
-function createGameBoxes() {
-    
-    for (let i = 0; i <= 8; i++)  {
-        let newBox = document.querySelector(`#box${i}`)
-        gameBoard[i] = newBox;
-        gameBoard[i].addEventListener('click', () => {
-            gameBoard[i] = 'x';
-        })
-    };
-    console.log(gameBoard)
+const ticTacToe = (() => {
+    const createPlayers = (name, marker, score) => {
+    return{name, marker, score}; // factory function to create players and their data.
 };
+    const startButton = document.querySelector("#start-button");
+    
+    let currentMarker = "X";
+    
+    let createGameBoard = (() => {
+        gameBoard = [];
+        for (let i = 0; i <= 8; i++)  {
+            let newBox = document.querySelector(`#box${i}`)
+            gameBoard[i] = newBox;
+            gameBoard[i].addEventListener('click', () => {
+                if (gameBoard.textContent == "") {
+                    
+                } else {gameBoard[i].textContent = currentMarker;}
+                if (currentMarker == 'X') {
+                    currentMarker = 'O';
+                } else {
+                    currentMarker = 'X';
+                }
+            })
+        };
+    })();
+    
+    
+    
+})();
 
-createGameBoxes();
 
-const createPlayers = ({name, marker, score}) => ({
-    name,
-    marker,
-    score,
-    playerInfo() {
-        return `${this.name, this.marker, this.score}`;
-    }
-})
+
+
 
 
 // const player1 = createPlayers({
@@ -30,19 +38,6 @@ const createPlayers = ({name, marker, score}) => ({
 //     marker: 'X',
 //     score: '0',
 // })
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 // let diceRoll = () => {
@@ -105,4 +100,4 @@ const createPlayers = ({name, marker, score}) => ({
 //         startButton.style.display = "none";
 //         animation();
 //     })
-// })();
+// })()
