@@ -9,7 +9,9 @@ const ticTacToe = (() => {
     };
     
     const player1 = createPlayers('mateo', 'X', 0);
-    const player2 = createPlayers('danny', 'O', 0)
+    const player2 = createPlayers('danny', 'O', 0);
+    
+    const commentary = document.querySelector("#choose-your-marker-text")
     
     // i need an object that holds data such as a key holding player1&2-score, and a key for whos turn it is. Lets call it ruleSet
     
@@ -30,16 +32,28 @@ const ticTacToe = (() => {
                     whosTurn = player1;
                 }
             }
-        })
+            if (gameBoard.boxes.slice(0,3).every(box => box.textContent == 'X')) {
+                console.log('Yay');
+            } else {
+                console.log('nope')
+            }})
+        
     }    
+    
+// variables inlcluded are boxes from the gameBoard, and we are accessing each players score.
+
+
+    
     return {
         player1,
         player2,
         whosTurn,
         gameBoard,
+        commentary,
     }
 })();
-    
+
+
     
     
     
