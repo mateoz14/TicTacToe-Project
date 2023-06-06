@@ -1,39 +1,80 @@
-
-
-
 const ticTacToe = (() => {
+    
     const createPlayers = (name, marker, score) => {
-        return{name, marker, score}; // factory function to create players and their data.
+        return {
+            name,
+            marker,
+            score,
+        }
     };
-    const startButton = document.querySelector("#start-button");
     
-    let currentMarker = "X";
+    const player1 = createPlayers('mateo', 'X', 0);
+    const player2 = createPlayers('danny', 'O', 0)
     
-    const createGameBox = (() => {
-        let gameBoard = [];
-        for (let i = 0; i <= 8; i++) {
-            let newBox = document.querySelector(`#box${i}`)
-            gameBoard[i] = newBox;
-            gameBoard[i].addEventListener('click', (() => {
-                if (gameBoard[i].textContent == "") {
-                    gameBoard[i].textContent = currentMarker;
-                    if (currentMarker == "X") {
-                        currentMarker ="O";
-                    } else {
-                        currentMarker = "X";
-                    }
+    // i need an object that holds data such as a key holding player1&2-score, and a key for whos turn it is. Lets call it ruleSet
+    
+    let whosTurn = player1;
+  
+    const gameBoard = {
+        boxes:[],
+    };
+    
+    for (let i = 0; i <= 8; i++) { // a for loop to add the eventlistener for each box so that the marker is added when it is clicked.
+        gameBoard.boxes[i] = document.querySelector(`#box${i}`)
+        gameBoard.boxes[i].addEventListener('click', () => {
+            if (gameBoard.boxes[i].textContent == "") {
+                gameBoard.boxes[i].textContent = whosTurn.marker;    // the text content of each box must be equal to whosTurn's marker.
+                if (whosTurn == player1) {
+                    whosTurn = player2
                 } else {
-                    // do zero zip nada.
+                    whosTurn = player1;
                 }
-            }))
-        } return gameBoard;
-    })();
-    
-    if ((gameBoard[0].textContent === gameBoard[]))
-
+            }
+        })
+    }    
+    return {
+        player1,
+        player2,
+        whosTurn,
+        gameBoard,
+    }
 })();
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
+    
 
+// let gameBoard = [];
+        // for (let i = 0; i <= 8; i++) {
+        //     let newBox = document.querySelector(`#box${i}`)
+        //     gameBoard[i] = newBox;
+        //     gameBoard[i].addEventListener('click', (() => {
+        //         if (gameBoard[i].textContent == "") {
+        //             gameBoard[i].textContent = currentMarker;
+        //             if (currentMarker == "X") {
+        //                 currentMarker ="O";
+        //             } else {
+        //                 currentMarker = "X";
+        //             }
+        //         } else {
+        //             // do zero zip nada.
+        //         }
+        //     }))
+        
+        // }   if (gameBoard.slice(0,2).every(element => (element.textContent === gameBoard[0].textContent) && (element.textContent != ""))) {
+        //     commentary.textContent = `${gameBoard[0].textContent} wins!`;
+        // }
 
 
 
