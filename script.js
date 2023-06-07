@@ -25,25 +25,25 @@ const ticTacToe = (() => {
         gameBoard.boxes[i] = document.querySelector(`#box${i}`)
         gameBoard.boxes[i].addEventListener('click', () => {
             if (gameBoard.boxes[i].textContent == "") {
-                gameBoard.boxes[i].textContent = whosTurn.marker;    // the text content of each box must be equal to whosTurn's marker.
-                if (whosTurn == player1) {
-                    whosTurn = player2
-                } else {
-                    whosTurn = player1;
-                }
+                gameBoard.boxes[i].textContent = whosTurn.marker
+                if (whosTurn == player1) {whosTurn = player2} else {whosTurn = player1};
+            };
+            // longg if statement setting the rules on who wins the game.
+            if ((ticTacToe.gameBoard.boxes[0].textContent != "" && ticTacToe.gameBoard.boxes[0].textContent === ticTacToe.gameBoard.boxes[3].textContent && ticTacToe.gameBoard.boxes[3].textContent === ticTacToe.gameBoard.boxes[6].textContent)
+                ||(ticTacToe.gameBoard.boxes[1].textContent != "" && ticTacToe.gameBoard.boxes[1].textContent === ticTacToe.gameBoard.boxes[4].textContent && ticTacToe.gameBoard.boxes[4].textContent === ticTacToe.gameBoard.boxes[7].textContent)
+                ||(ticTacToe.gameBoard.boxes[2].textContent != "" && ticTacToe.gameBoard.boxes[2].textContent === ticTacToe.gameBoard.boxes[5].textContent && ticTacToe.gameBoard.boxes[5].textContent === ticTacToe.gameBoard.boxes[8].textContent)
+                ||(ticTacToe.gameBoard.boxes[0].textContent != "" && ticTacToe.gameBoard.boxes[0].textContent === ticTacToe.gameBoard.boxes[1].textContent && ticTacToe.gameBoard.boxes[1].textContent === ticTacToe.gameBoard.boxes[2].textContent)
+                ||(ticTacToe.gameBoard.boxes[3].textContent != "" && ticTacToe.gameBoard.boxes[3].textContent === ticTacToe.gameBoard.boxes[4].textContent && ticTacToe.gameBoard.boxes[4].textContent === ticTacToe.gameBoard.boxes[5].textContent)
+                ||(ticTacToe.gameBoard.boxes[6].textContent != "" && ticTacToe.gameBoard.boxes[6].textContent === ticTacToe.gameBoard.boxes[7].textContent && ticTacToe.gameBoard.boxes[7].textContent === ticTacToe.gameBoard.boxes[8].textContent)
+                ||(ticTacToe.gameBoard.boxes[0].textContent != "" && ticTacToe.gameBoard.boxes[0].textContent === ticTacToe.gameBoard.boxes[4].textContent && ticTacToe.gameBoard.boxes[4].textContent === ticTacToe.gameBoard.boxes[8].textContent)) {
+                ticTacToe.commentary.textContent = "player won"
             }
-            if (gameBoard.boxes.slice(0,3).every(box => box.textContent == 'X')) {
-                console.log('Yay');
-            } else {
-                console.log('nope')
-            }})
+            
+        });
         
-    }    
+    };
     
-// variables inlcluded are boxes from the gameBoard, and we are accessing each players score.
-
-
-    
+// variables inlcluded are boxes from the gameBoard, and we are accessing each players score.    
     return {
         player1,
         player2,
