@@ -28,7 +28,7 @@ const ticTacToe = (() => {
                 gameBoard.boxes[i].textContent = whosTurn.marker
                 if (whosTurn == player1) {whosTurn = player2} else {whosTurn = player1};
             };
-            // longg if statement setting the rules on who wins the game.
+            // longg if statement setting the rules on who wins the game. **> what are some other ways to write this out? hmmm.
             if ((ticTacToe.gameBoard.boxes[0].textContent != "" && ticTacToe.gameBoard.boxes[0].textContent === ticTacToe.gameBoard.boxes[3].textContent && ticTacToe.gameBoard.boxes[3].textContent === ticTacToe.gameBoard.boxes[6].textContent)
                 ||(ticTacToe.gameBoard.boxes[1].textContent != "" && ticTacToe.gameBoard.boxes[1].textContent === ticTacToe.gameBoard.boxes[4].textContent && ticTacToe.gameBoard.boxes[4].textContent === ticTacToe.gameBoard.boxes[7].textContent)
                 ||(ticTacToe.gameBoard.boxes[2].textContent != "" && ticTacToe.gameBoard.boxes[2].textContent === ticTacToe.gameBoard.boxes[5].textContent && ticTacToe.gameBoard.boxes[5].textContent === ticTacToe.gameBoard.boxes[8].textContent)
@@ -37,6 +37,8 @@ const ticTacToe = (() => {
                 ||(ticTacToe.gameBoard.boxes[6].textContent != "" && ticTacToe.gameBoard.boxes[6].textContent === ticTacToe.gameBoard.boxes[7].textContent && ticTacToe.gameBoard.boxes[7].textContent === ticTacToe.gameBoard.boxes[8].textContent)
                 ||(ticTacToe.gameBoard.boxes[0].textContent != "" && ticTacToe.gameBoard.boxes[0].textContent === ticTacToe.gameBoard.boxes[4].textContent && ticTacToe.gameBoard.boxes[4].textContent === ticTacToe.gameBoard.boxes[8].textContent)) {
                 ticTacToe.commentary.textContent = "player won"
+            } else if (gameBoard.boxes.every(box => box.textContent !== "")) {
+                commentary.textContent = "It is a tie!";
             }
             
         });
