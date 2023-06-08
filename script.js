@@ -1,4 +1,42 @@
 const ticTacToe = (() => {
+    const commentary = document.querySelector("#choose-your-marker-text");
+    const startButton = document.querySelector("#start-button");
+    const markerSelection = document.querySelector(".marker-selection");
+    const xMarker = document.querySelector("#X-marker")
+    const oMarker = document.querySelector("#O-marker")
+    
+    const commentatorBox = document.querySelector(".start-the-game"); // where the form will be appended.
+    const nameInput = document.createElement("input");
+    const submitNames = document.createElement("submit");
+    const form = document.createElement("form");
+    
+    form.setAttribute("id", "myForm");
+    
+    
+    startButton.addEventListener('click', () => {
+        startButton.style.display = 'none';
+        commentary.style.display = "flex";
+        commentary.textContent = `${whosTurn.name} choose your marker`
+        markerSelection.style.display = "flex";
+        xMarker.addEventListener('click', () => {
+            if (whosTurn == player1) {
+                player1.marker = 'X';
+                player2.marker = 'O';
+            } else {
+                player2.marker = 'X';
+                player1.marker = 'O';
+            }; 
+        });  
+        oMarker.addEventListener('click', () => {
+            if (whosTurn == player1) {
+                player1.marker = 'O';
+                player2.marker = 'X';
+            } else {
+                player1.marker = 'X';
+                player2.marker = 'O';
+            }; 
+        });  
+    });
     
     const createPlayers = (name, marker, score) => {
         return {
@@ -8,18 +46,22 @@ const ticTacToe = (() => {
         }
     };
     
+    
     const player1 = createPlayers('mateo', 'X', 0);
     const player2 = createPlayers('danny', 'O', 0);
     
-    const commentary = document.querySelector("#choose-your-marker-text")
+   
     
     // i need an object that holds data such as a key holding player1&2-score, and a key for whos turn it is. Lets call it ruleSet
     
     let whosTurn = player1;
+    
   
     const gameBoard = {
         boxes:[],
     };
+    
+    
     
     for (let i = 0; i <= 8; i++) { // a for loop to add the eventlistener for each box so that the marker is added when it is clicked.
         gameBoard.boxes[i] = document.querySelector(`#box${i}`)
@@ -35,7 +77,9 @@ const ticTacToe = (() => {
                 ||(ticTacToe.gameBoard.boxes[0].textContent != "" && ticTacToe.gameBoard.boxes[0].textContent === ticTacToe.gameBoard.boxes[1].textContent && ticTacToe.gameBoard.boxes[1].textContent === ticTacToe.gameBoard.boxes[2].textContent)
                 ||(ticTacToe.gameBoard.boxes[3].textContent != "" && ticTacToe.gameBoard.boxes[3].textContent === ticTacToe.gameBoard.boxes[4].textContent && ticTacToe.gameBoard.boxes[4].textContent === ticTacToe.gameBoard.boxes[5].textContent)
                 ||(ticTacToe.gameBoard.boxes[6].textContent != "" && ticTacToe.gameBoard.boxes[6].textContent === ticTacToe.gameBoard.boxes[7].textContent && ticTacToe.gameBoard.boxes[7].textContent === ticTacToe.gameBoard.boxes[8].textContent)
-                ||(ticTacToe.gameBoard.boxes[0].textContent != "" && ticTacToe.gameBoard.boxes[0].textContent === ticTacToe.gameBoard.boxes[4].textContent && ticTacToe.gameBoard.boxes[4].textContent === ticTacToe.gameBoard.boxes[8].textContent)) {
+                ||(ticTacToe.gameBoard.boxes[0].textContent != "" && ticTacToe.gameBoard.boxes[0].textContent === ticTacToe.gameBoard.boxes[4].textContent && ticTacToe.gameBoard.boxes[4].textContent === ticTacToe.gameBoard.boxes[8].textContent)
+                ||(ticTacToe.gameBoard.boxes[2].textContent != "" && ticTacToe.gameBoard.boxes[2].textContent === ticTacToe.gameBoard.boxes[4].textContent && ticTacToe.gameBoard.boxes[4].textContent === ticTacToe.gameBoard.boxes[6].textContent)
+                ) {
                 ticTacToe.commentary.textContent = "player won"
             } else if (gameBoard.boxes.every(box => box.textContent !== "")) {
                 commentary.textContent = "It is a tie!";
@@ -52,6 +96,12 @@ const ticTacToe = (() => {
         whosTurn,
         gameBoard,
         commentary,
+        startButton,
+        commentatorBox,
+        form,
+        nameInput,
+        submitNames,
+        markerSelection
     }
 })();
 
