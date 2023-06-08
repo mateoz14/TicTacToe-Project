@@ -4,6 +4,10 @@ const ticTacToe = (() => {
     const markerSelection = document.querySelector(".marker-selection");
     const xMarker = document.querySelector("#X-marker")
     const oMarker = document.querySelector("#O-marker")
+    const restartButton = document.createElement("button")
+    
+    restartButton.setAttribute("id", "restart-button");
+    restartButton.textContent = "Play again";
     
     const commentatorBox = document.querySelector(".start-the-game"); // where the form will be appended.
     const nameInput = document.createElement("input");
@@ -14,29 +18,91 @@ const ticTacToe = (() => {
     
     
     startButton.addEventListener('click', () => {
+        // display the appropriate text for the beginnig of the game.
         startButton.style.display = 'none';
         commentary.style.display = "flex";
         commentary.textContent = `${whosTurn.name} choose your marker`
         markerSelection.style.display = "flex";
+        // eventlisteners on the marker buttons to declare what markers the players will be assigned.
         xMarker.addEventListener('click', () => {
             if (whosTurn == player1) {
                 player1.marker = 'X';
-                player2.marker = 'O';
+                player2.marker = 'O'; 
+                whosTurn = player1;
             } else {
                 player2.marker = 'X';
                 player1.marker = 'O';
+                whosTurn = player2;
             }; 
+            xMarker.style.display = 'none';
+            oMarker.style.display = 'none';
+            commentary.textContent = `${whosTurn.name} is X, go first !`
+            gameRules();
         });  
         oMarker.addEventListener('click', () => {
             if (whosTurn == player1) {
                 player1.marker = 'O';
                 player2.marker = 'X';
+                whosTurn = player2;
             } else {
                 player1.marker = 'X';
                 player2.marker = 'O';
+                whosTurn = player1;
             }; 
+            xMarker.style.display = 'none';
+            oMarker.style.display = 'none';
+            commentary.textContent = `${whosTurn.name} is X, go first!`
+            gameRules();
         });  
+        
     });
+    
+    const gameRules = () => {
+        for (let i = 0; i <= 8; i++) { // a for loop to add the eventlistener for each box so that the marker is added when it is clicked.
+        gameBoard.boxes[i] = document.querySelector(`#box${i}`)
+        gameBoard.boxes[i].addEventListener('click', () => {
+            if (gameBoard.boxes[i].textContent == "") {
+                gameBoard.boxes[i].textContent = whosTurn.marker
+                commentary.textContent = `${whosTurn.name}'s turn`
+                if (whosTurn == player1) {
+                    whosTurn = player2
+                    commentary.textContent = `${player2.name}'s Turn`
+                } else {
+                    whosTurn = player1
+                    commentary.textContent = `${player1.name}'s Turn`
+                }
+            };
+            // longg if statement setting the rules on who wins the game. **> what are some other ways to write this out? hmmm.
+            if ((ticTacToe.gameBoard.boxes[0].textContent != "" && ticTacToe.gameBoard.boxes[0].textContent === ticTacToe.gameBoard.boxes[3].textContent && ticTacToe.gameBoard.boxes[3].textContent === ticTacToe.gameBoard.boxes[6].textContent)
+                ||(ticTacToe.gameBoard.boxes[1].textContent != "" && ticTacToe.gameBoard.boxes[1].textContent === ticTacToe.gameBoard.boxes[4].textContent && ticTacToe.gameBoard.boxes[4].textContent === ticTacToe.gameBoard.boxes[7].textContent)
+                ||(ticTacToe.gameBoard.boxes[2].textContent != "" && ticTacToe.gameBoard.boxes[2].textContent === ticTacToe.gameBoard.boxes[5].textContent && ticTacToe.gameBoard.boxes[5].textContent === ticTacToe.gameBoard.boxes[8].textContent)
+                ||(ticTacToe.gameBoard.boxes[0].textContent != "" && ticTacToe.gameBoard.boxes[0].textContent === ticTacToe.gameBoard.boxes[1].textContent && ticTacToe.gameBoard.boxes[1].textContent === ticTacToe.gameBoard.boxes[2].textContent)
+                ||(ticTacToe.gameBoard.boxes[3].textContent != "" && ticTacToe.gameBoard.boxes[3].textContent === ticTacToe.gameBoard.boxes[4].textContent && ticTacToe.gameBoard.boxes[4].textContent === ticTacToe.gameBoard.boxes[5].textContent)
+                ||(ticTacToe.gameBoard.boxes[6].textContent != "" && ticTacToe.gameBoard.boxes[6].textContent === ticTacToe.gameBoard.boxes[7].textContent && ticTacToe.gameBoard.boxes[7].textContent === ticTacToe.gameBoard.boxes[8].textContent)
+                ||(ticTacToe.gameBoard.boxes[0].textContent != "" && ticTacToe.gameBoard.boxes[0].textContent === ticTacToe.gameBoard.boxes[4].textContent && ticTacToe.gameBoard.boxes[4].textContent === ticTacToe.gameBoard.boxes[8].textContent)
+                ||(ticTacToe.gameBoard.boxes[2].textContent != "" && ticTacToe.gameBoard.boxes[2].textContent === ticTacToe.gameBoard.boxes[4].textContent && ticTacToe.gameBoard.boxes[4].textContent === ticTacToe.gameBoard.boxes[6].textContent)
+                ) {
+                if (whosTurn = player1) {
+                    commentary.textContent = `TicTacToe! ${player1.name} Wins!`;
+                } else {
+                    commentary.textContent = `TicTacToe! ${player2.name} Wins!`;
+                }
+                gameBoard.boxes = [] // reset the gameboard, and removes functionality.
+                markerSelection.appendChild(restartButton) // puts the restart buttons where the marker selection would be. duh
+                restartButton.style.display = "flex";
+
+            } else if (gameBoard.boxes.every(box => box.textContent !== "")) {
+                commentary.textContent = "It is a tie!";
+                gameBoard.boxes = [] // reset the gameboard, and removes functionality.
+                markerSelection.appendChild(restartButton)
+                restartButton.style.display = "flex";
+            }
+            
+        });
+        
+    };
+    
+};
     
     const createPlayers = (name, marker, score) => {
         return {
@@ -61,34 +127,6 @@ const ticTacToe = (() => {
         boxes:[],
     };
     
-    
-    
-    for (let i = 0; i <= 8; i++) { // a for loop to add the eventlistener for each box so that the marker is added when it is clicked.
-        gameBoard.boxes[i] = document.querySelector(`#box${i}`)
-        gameBoard.boxes[i].addEventListener('click', () => {
-            if (gameBoard.boxes[i].textContent == "") {
-                gameBoard.boxes[i].textContent = whosTurn.marker
-                if (whosTurn == player1) {whosTurn = player2} else {whosTurn = player1};
-            };
-            // longg if statement setting the rules on who wins the game. **> what are some other ways to write this out? hmmm.
-            if ((ticTacToe.gameBoard.boxes[0].textContent != "" && ticTacToe.gameBoard.boxes[0].textContent === ticTacToe.gameBoard.boxes[3].textContent && ticTacToe.gameBoard.boxes[3].textContent === ticTacToe.gameBoard.boxes[6].textContent)
-                ||(ticTacToe.gameBoard.boxes[1].textContent != "" && ticTacToe.gameBoard.boxes[1].textContent === ticTacToe.gameBoard.boxes[4].textContent && ticTacToe.gameBoard.boxes[4].textContent === ticTacToe.gameBoard.boxes[7].textContent)
-                ||(ticTacToe.gameBoard.boxes[2].textContent != "" && ticTacToe.gameBoard.boxes[2].textContent === ticTacToe.gameBoard.boxes[5].textContent && ticTacToe.gameBoard.boxes[5].textContent === ticTacToe.gameBoard.boxes[8].textContent)
-                ||(ticTacToe.gameBoard.boxes[0].textContent != "" && ticTacToe.gameBoard.boxes[0].textContent === ticTacToe.gameBoard.boxes[1].textContent && ticTacToe.gameBoard.boxes[1].textContent === ticTacToe.gameBoard.boxes[2].textContent)
-                ||(ticTacToe.gameBoard.boxes[3].textContent != "" && ticTacToe.gameBoard.boxes[3].textContent === ticTacToe.gameBoard.boxes[4].textContent && ticTacToe.gameBoard.boxes[4].textContent === ticTacToe.gameBoard.boxes[5].textContent)
-                ||(ticTacToe.gameBoard.boxes[6].textContent != "" && ticTacToe.gameBoard.boxes[6].textContent === ticTacToe.gameBoard.boxes[7].textContent && ticTacToe.gameBoard.boxes[7].textContent === ticTacToe.gameBoard.boxes[8].textContent)
-                ||(ticTacToe.gameBoard.boxes[0].textContent != "" && ticTacToe.gameBoard.boxes[0].textContent === ticTacToe.gameBoard.boxes[4].textContent && ticTacToe.gameBoard.boxes[4].textContent === ticTacToe.gameBoard.boxes[8].textContent)
-                ||(ticTacToe.gameBoard.boxes[2].textContent != "" && ticTacToe.gameBoard.boxes[2].textContent === ticTacToe.gameBoard.boxes[4].textContent && ticTacToe.gameBoard.boxes[4].textContent === ticTacToe.gameBoard.boxes[6].textContent)
-                ) {
-                ticTacToe.commentary.textContent = "player won"
-            } else if (gameBoard.boxes.every(box => box.textContent !== "")) {
-                commentary.textContent = "It is a tie!";
-            }
-            
-        });
-        
-    };
-    
 // variables inlcluded are boxes from the gameBoard, and we are accessing each players score.    
     return {
         player1,
@@ -101,7 +139,8 @@ const ticTacToe = (() => {
         form,
         nameInput,
         submitNames,
-        markerSelection
+        markerSelection,
+        gameRules,
     }
 })();
 
