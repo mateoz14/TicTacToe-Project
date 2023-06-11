@@ -42,18 +42,72 @@ html {
 
 #dice-roll  {
     background-color: black;
+    size: 25px;
     border-color: black;
-    color: antiquewhite;
+    color: rgb(12, 232, 192);
     position: absolute;
     display: none;
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+
+#choose-your-marker-text {
+    display: none;
+    color: white;
+    font-size: 40px;
+    padding: 20px;
+    font-family: "Lucida Console", "Courier New", monospace;
+
+}
+
+.marker-selection {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    gap: 30px;
+}
+
+#X-marker, #O-marker {
+    background-color:rgb(16, 199, 165);
+    color: white;
+    min-height: 40px;
+    min-width: 40px;
+    font-family: "Lucida Console", "Courier New", monospace;
+    font-size: 30px;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.3s ease;
+    border: 1px solid black;
+}
+#X-marker:hover, #O-marker:hover {
+    background-color: rgb(6, 131, 109);
+    transform: scale(1.1);
 }
 
 
+.start-the-game {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;    
+    align-items: center;
+}
 
-.button {
+#restart-button {
+    font-family: "Lucida Console", "Courier New", monospace;
+    padding: 8px;
     display: flex;
     justify-content: center;    
     align-items: center;
+    background-color: rgb(9, 177, 146);
+    color: antiquewhite;
+    font-size: 18px;
+    width: fit-content;
+    border-radius: 25%;
+    border: solid 1px white;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.3s ease;
+}
+
+#restart-button:hover {
+    background-color: rgb(6, 131, 109);
+    transform: scale(1.1); /* Animate! */
 }
 
 .game-container {
@@ -71,7 +125,7 @@ html {
 .tictactoe-box {
     display: grid;
     width: 80%;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
     justify-self: center;
 }
 
@@ -80,7 +134,7 @@ div[class^="row"], div[class^="row"]>* {
     display: grid;
     max-height: 500px;
     min-width: 100px;
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
 }
 
 .player1-board, .player2-board {
@@ -96,4 +150,18 @@ div[class^="player"]>* {
     justify-content: center;
     padding: 30px;
     color: white;
+}
+
+div[class^="row"]>* {
+    color: white;
+    font-size: 80px;
+    font-family: "Lucida Console", "Courier New", monospace;
+    text-align: center;
+}
+
+.box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 70px;
 }

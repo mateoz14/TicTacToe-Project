@@ -9,17 +9,62 @@ const ticTacToe = (() => {
     restartButton.setAttribute("id", "restart-button");
     restartButton.textContent = "Play again";
     
-    const commentatorBox = document.querySelector(".start-the-game"); // where the form will be appended.
-    const nameInput = document.createElement("input");
-    const submitNames = document.createElement("submit");
-    const form = document.createElement("form");
-    
-    form.setAttribute("id", "myForm");
+    const commentatorBox = document.querySelector(".start-the-game"); // where the form will be appended
     
     
     startButton.addEventListener('click', () => {
-        // display the appropriate text for the beginnig of the game.
+        // display the appropriate text for the beginning of the game.
         startButton.style.display = 'none';
+        startOfGame();
+    });
+    
+    const getPlayerInfo = () => {
+        
+        let form = document.createElement("form"); // create the form.
+        
+        let player1Input = document.createElement("input"); // create the input boxes. 
+        let player2Input = document.createElement("input");
+        let label1 = document.createElement('label');
+        let label2 = document.createElement('label');
+
+        let submitNames = document.createElement("submit"); // submit button.
+        
+        form.setAttribute("class", "PlayerNameForm"); // set a class on the form duh.
+        
+        player1Input.setAttribute('id', 'player1'); // set the id of the player input boxes duh.
+        player1Input.setAttribute('type', 'text');
+        label1.setAttribute('for', 'player1Input');
+        label1.textContent = "Player-1 Name: ";
+        
+        player2Input.setAttribute('id', 'player2'); 
+        player2Input.setAttribute('type', 'text');
+        label2.setAttribute('for', 'player2Input');
+        label2.textContent = "Player-2 Name: ";
+
+        submitNames.setAttribute('id', 'submit-button');
+        submitNames.textContent = "Submit";
+        
+        form.appendChild(label1);
+        form.appendChild(player1Input) // add the inputs to the form.
+        form.appendChild(label2);
+        form.appendChild(player2Input);
+        form.appendChild(submitNames);
+       
+        commentatorBox.appendChild(form);
+        
+    }
+    
+    getPlayerInfo()
+    
+    
+    restartButton.addEventListener('click', () => {
+        xMarker.style.display = "flex";
+        oMarker.style.display = "flex";
+        restartButton.style.display = "none";
+        startOfGame();
+    })
+    
+    const startOfGame = () => {
         commentary.style.display = "flex";
         commentary.textContent = `${whosTurn.name} choose your marker`
         markerSelection.style.display = "flex";
@@ -54,19 +99,19 @@ const ticTacToe = (() => {
             commentary.textContent = `${whosTurn.name} is X, go first!`
             gameRules();
         });  
-        
-    });
+    };
     
     const gameRules = () => {
         for (let i = 0; i <= 8; i++) { // a for loop to add the eventlistener for each box so that the marker is added when it is clicked.
         gameBoard.boxes[i] = document.querySelector(`#box${i}`)
+        gameBoard.boxes[i].textContent = ""; // makes sure the board is clear when the game begins.
         gameBoard.boxes[i].addEventListener('click', () => {
             if (gameBoard.boxes[i].textContent == "") {
                 gameBoard.boxes[i].textContent = whosTurn.marker
                 commentary.textContent = `${whosTurn.name}'s turn`
                 if (whosTurn == player1) {
-                    whosTurn = player2
-                    commentary.textContent = `${player2.name}'s Turn`
+                    whosTurn = player2 // set whosTurn to the opposite player.
+                    commentary.textContent = `${player2.name}'s Turn` // show whosturn duh.
                 } else {
                     whosTurn = player1
                     commentary.textContent = `${player1.name}'s Turn`
@@ -102,7 +147,7 @@ const ticTacToe = (() => {
         
     };
     
-};
+    };
     
     const createPlayers = (name, marker, score) => {
         return {
@@ -113,8 +158,8 @@ const ticTacToe = (() => {
     };
     
     
-    const player1 = createPlayers('mateo', 'X', 0);
-    const player2 = createPlayers('danny', 'O', 0);
+    const player1 = createPlayers('Jimbo', 'X', 0);
+    const player2 = createPlayers('Slice', 'O', 0);
     
    
     
@@ -136,11 +181,11 @@ const ticTacToe = (() => {
         commentary,
         startButton,
         commentatorBox,
-        form,
-        nameInput,
-        submitNames,
         markerSelection,
         gameRules,
+        restartButton,
+        startOfGame,
+        getPlayerInfo,
     }
 })();
 
