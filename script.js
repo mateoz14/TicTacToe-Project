@@ -18,9 +18,17 @@ const ticTacToe = (() => {
         startOfGame();
     });
     
+    const createPlayers = (name, marker, score) => {
+        return {
+            name,
+            marker,
+            score,
+        }
+    };
+    
     const getPlayerInfo = () => {
-        
         let form = document.createElement("form"); // create the form.
+        form.style.display = 'flex'; // make the form show up.
         
         let player1Input = document.createElement("input"); // create the input boxes. 
         let player2Input = document.createElement("input");
@@ -52,6 +60,12 @@ const ticTacToe = (() => {
        
         commentatorBox.appendChild(form);
         
+        return {
+            player1Input,
+            player2Input,
+            submitNames,
+            form,
+        }
     }
     
     getPlayerInfo()
@@ -148,20 +162,6 @@ const ticTacToe = (() => {
     };
     
     };
-    
-    const createPlayers = (name, marker, score) => {
-        return {
-            name,
-            marker,
-            score,
-        }
-    };
-    
-    
-    const player1 = createPlayers('Jimbo', 'X', 0);
-    const player2 = createPlayers('Slice', 'O', 0);
-    
-   
     
     // i need an object that holds data such as a key holding player1&2-score, and a key for whos turn it is. Lets call it ruleSet
     
